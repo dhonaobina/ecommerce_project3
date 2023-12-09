@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import {data} from "./data";
+import logo from "./images/logo.svg";
+import avatar from "./images/image-avatar.png";
+import { IoCartOutline } from "react-icons/io5";
+
+function Header() {
+  return (
+    <>
+      <div>
+        <img src={logo} alt=""></img>
+
+        <nav>
+          <ul>
+            <li>Collections</li>
+            <li>Men</li>
+            <li>Women</li>
+            <li>About</li>
+            <li>Contact</li>
+          </ul>
+        </nav>
+      </div>
+
+      <div>
+        <ul>
+          <li><button><IoCartOutline /></button></li>
+          <li><img src={avatar} alt=""></img></li>
+        </ul>
+      </div>
+    </>
+  )
+}
 
 function App() {
+  const [products] = useState(data)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+    </>
   );
 }
 
