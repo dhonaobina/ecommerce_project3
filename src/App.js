@@ -7,6 +7,7 @@ import { IoCartOutline } from "react-icons/io5";
 function Header() {
   return (
     <>
+      <header className="flex items-center justify-between p-8 border-b border-slate-400">
       <div>
         <img src={logo} alt=""></img>
 
@@ -27,6 +28,7 @@ function Header() {
           <li><img src={avatar} alt=""></img></li>
         </ul>
       </div>
+      </header>
     </>
   )
 }
