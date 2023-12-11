@@ -51,12 +51,12 @@ function App() {
 
       <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
         <article>
-          <img src={mainImage} alt="" className="h-96"/>
+          <img src={mainImage} alt="" className="w-9/12 rounded-2xl"/>
 
-          <ul className="flex items-center justify-start gap-3 flex-wrap">
+          <ul className="flex items-center justify-start gap-5 flex-wrap mt-5">
             {products.map((item, index) => ( 
               <li key={item.id} onClick={() => setValue(index)}>
-                <img src={item.thumbnail} alt="" className="w-20" />
+                <img src={item.thumbnail} alt="" className="w-20 rounded-xl" />
               </li>
             ))}
           </ul>
