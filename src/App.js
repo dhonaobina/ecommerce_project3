@@ -75,8 +75,8 @@ function App() {
     <>
       <Header />
 
-      <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:mt-10">
-        <article>
+      <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:mt-10 lg:place-items-center">
+        <article >
           <div>
             {products.map((item, index) => (
               <div key={index} className={slideIndex === index + 1 ?  "relative" : "hidden"}>
@@ -125,7 +125,7 @@ function App() {
           durable rubber outer sole, they’ll withstand everything the weather can offer.
           </p>
 
-          <div className="flex flex-wrap items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between lg:flex-column lg:items-start lg:gap-2">
             <ul className="flex items-center gap-5">
               <li className="text-slate-900 font-bold text-xl">$125</li>
               <li className="bg-orange-100 py-1 px-2 text-orange-400 tracking-wide text-small font-bold inline-block rounded shadow">
@@ -138,8 +138,8 @@ function App() {
             </p>
           </div>
 
-          <div className="mt-10">
-            <ul className="flex items-center justify-between bg-slate-100 py-2 px-4 rounded shadow">
+          <div className="mt-10 lg:flex items-center justify-between gap-2">
+            <ul className="flex items-center justify-between bg-slate-100 py-2 px-4 rounded shadow lg:flex-1">
               <li onClick={handleMinus} className="cursor-pointer">
                 <img src={minus} alt="" />
               </li>
@@ -148,8 +148,8 @@ function App() {
                 <img src={plus} alt="" />
               </li>
             </ul>
-            <div>
-            <button className="flex items-center justify-center gap-4 bg-orange-500 py-2 px-4 w-full text-center text-white font-bold rounded-lg shadow mt-5 w-full">
+            <div className=" lg:flex-1">
+            <button className="flex items-center justify-center gap-4 bg-orange-500 py-2 px-4 w-full text-center text-white font-bold rounded-lg shadow mt-5 w-full lg:mt-0 hover:bg-orange-600 transition-all duration-200">
                 <IoCartOutline /> Add to cart
             </button>
             </div>
