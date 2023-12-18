@@ -42,6 +42,48 @@ function Header() {
   );
 }
 
+function Lightbox({products, slideIndex, nextSlide, previousSlide}) {
+  return (
+    <>
+      <article className="bg-black bg-opacity-75 absolute top-0 left-0 right-0 bottom-0 z-50">       
+      <div>
+{products.map((item, index) => (
+  <div 
+  key={index} 
+  className={slideIndex === index + 1 ?  "relative" : "hidden"}
+>
+  <img 
+    src={item.mainImage} 
+    alt="" 
+    className="w-full lg:rounded-2xl"
+  />
+
+  <ul>
+      <li>
+        <button 
+          onClick={previousSlide} 
+          className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 opacity-50"
+        >
+          <FaChevronLeft />
+        </button>
+      </li>
+      <li>
+        <button 
+          onClick={nextSlide} 
+          className="bg-white rounded-full p-5 shadow absolute right-4 top-1/2 -translate-y-1/2 opacity-50"
+        >
+          <FaChevronRight />
+        </button>
+      </li>
+  </ul>
+        </div>
+  ))};
+          </div>
+        </article>
+    </>
+  );
+}
+
 function App() {
   const [products] = useState(data);
   const[value, setValue] = useState(1);
@@ -74,25 +116,29 @@ function App() {
   return (
     <>
       <Header />
+      <Lightbox products={products} slideIndex={slideIndex} nextSlide={nextSlide} previousSlide={previousSlide}/>
 
-      <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:mt-10 lg:place-items-center">
+      <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:place-items-center lg:py-20">
         <article >
           <div>
             {products.map((item, index) => (
-              <div key={index} className={slideIndex === index + 1 ?  "relative" : "hidden"}>
-                <img src={item.mainImage} alt="" className="w-full lg:rounded-2xl" />
-                <ul className="lg:hidden ">
-                  <li>
-                    <button onClick={previousSlide} className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 opacity-50">
-                      <FaChevronLeft />
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={nextSlide} className="bg-white rounded-full p-5 shadow absolute right-4 top-1/2 -translate-y-1/2 opacity-50">
-                      <FaChevronRight />
-                    </button>
-                  </li>
-                </ul>
+              <div 
+                key={index} 
+                className={slideIndex === index + 1 ?  "relative" : "hidden"}
+              >
+                  <img src={item.mainImage} alt="" className="w-full lg:rounded-2xl" />
+                  <ul className="lg:hidden ">
+                      <li>
+                        <button onClick={previousSlide} className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 opacity-50">
+                          <FaChevronLeft />
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={nextSlide} className="bg-white rounded-full p-5 shadow absolute right-4 top-1/2 -translate-y-1/2 opacity-50">
+                          <FaChevronRight />
+                        </button>
+                      </li>
+                    </ul>
               </div>
             ))}
       
