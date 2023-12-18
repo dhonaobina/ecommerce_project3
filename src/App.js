@@ -6,6 +6,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import avatar from "./images/image-avatar.png";
 import minus from "./images/icon-minus.svg";
 import plus from "./images/icon-plus.svg";
+import close from "./images/icon-close.svg";
 
 function Header() {
   return (
@@ -42,44 +43,48 @@ function Header() {
   );
 }
 
-function Lightbox({products, slideIndex, nextSlide, previousSlide}) {
+function Lightbox({products, slideIndex, nextSlide, previousSlide, setShowLightbox}) {
   return (
     <>
-      <article className="bg-black bg-opacity-75 absolute top-0 left-0 right-0 bottom-0 z-50">       
-      <div>
-{products.map((item, index) => (
-  <div 
-  key={index} 
-  className={slideIndex === index + 1 ?  "relative" : "hidden"}
->
-  <img 
-    src={item.mainImage} 
-    alt="" 
-    className="w-full lg:rounded-2xl"
-  />
+      <article className="bg-black bg-opacity-75 fixed top-0 left-0 right-0 bottom-0 z-50">  
+          <button onClick={() => setShowLightbox(false)}>
+            <img src={close} alt=""className="w-10 absolute top-20 right-20"/>
+          </button>
 
-  <ul>
-      <li>
-        <button 
-          onClick={previousSlide} 
-          className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 opacity-50"
-        >
-          <FaChevronLeft />
-        </button>
-      </li>
-      <li>
-        <button 
-          onClick={nextSlide} 
-          className="bg-white rounded-full p-5 shadow absolute right-4 top-1/2 -translate-y-1/2 opacity-50"
-        >
-          <FaChevronRight />
-        </button>
-      </li>
-  </ul>
+        <div className="flex items-center justify-center h-screen">       
+          {products.map((item, index) => (
+          <div 
+            key={index} 
+            className={slideIndex === index + 1 ?  "relative" : "hidden"}
+          >
+            <img 
+              src={item.mainImage} 
+              alt="" 
+              className="big-image lg:w-full lg:rounded-2xl"
+            />
+
+            <ul>
+                <li>
+                  <button 
+                    onClick={previousSlide} 
+                    className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 opacity-50"
+                  >
+                    <FaChevronLeft />
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={nextSlide} 
+                    className="bg-white rounded-full p-5 shadow absolute right-4 top-1/2 -translate-y-1/2 opacity-50"
+                  >
+                    <FaChevronRight />
+                  </button>
+                </li>
+            </ul>
         </div>
   ))};
-          </div>
-        </article>
+      </div>
+      </article>
     </>
   );
 }
@@ -88,15 +93,14 @@ function App() {
   const [products] = useState(data);
   const[value, setValue] = useState(1);
   const [amount, setAmount] = useState(0);
-  const [slideIndex, setSlideIndex] = useState(1)
-  
-  const { mainImage } = products[value]
+  const [slideIndex, setSlideIndex] = useState(1);
+  const [showLightbox, setShowLightbox] = useState(false);
 
   const nextSlide = () => {
     if (slideIndex !== products.length) {
       setSlideIndex(slideIndex + 1)
     } else if (slideIndex === products.length) {
-      setSlideIndex(1)
+      setSlideIndex(1);
     }
   }
 
@@ -104,19 +108,27 @@ function App() {
     if (slideIndex !== 1) {
       setSlideIndex(slideIndex - 1)
     } else if (slideIndex === 1) {
-      setSlideIndex(products.length)
+      setSlideIndex(products.length);
     }
   }
 
   const handleMinus = () => {
     setAmount(amount - 1)
-    if (amount <=0) setAmount (0)
+    if (amount <=0) setAmount (0);
   };
   
   return (
     <>
       <Header />
-      <Lightbox products={products} slideIndex={slideIndex} nextSlide={nextSlide} previousSlide={previousSlide}/>
+      {showLightbox && 
+          <Lightbox 
+          products={products} 
+          slideIndex={slideIndex} 
+          nextSlide={nextSlide} 
+          previousSlide={previousSlide}
+          setShowLightbox={setShowLightbox}
+        />
+      }
 
       <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:place-items-center lg:py-20">
         <article >
@@ -126,7 +138,12 @@ function App() {
                 key={index} 
                 className={slideIndex === index + 1 ?  "relative" : "hidden"}
               >
-                  <img src={item.mainImage} alt="" className="w-full lg:rounded-2xl" />
+                  <img 
+                    src={item.mainImage} 
+                    alt="" className="w-full lg:rounded-2xl cursor-pointer"
+                    onClick={() => setShowLightbox(true)}
+                  />
+
                   <ul className="lg:hidden ">
                       <li>
                         <button onClick={previousSlide} className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 opacity-50">
