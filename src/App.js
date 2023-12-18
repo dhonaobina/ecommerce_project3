@@ -72,23 +72,34 @@ function App() {
             ))}
           </ul>
         </article>
-        <article>
-          <h2 className="bg-slate-100 py-1 px-2 text-orange-400 uppercase tracking-wide text-small font-bold inline-block rounded shadow mb-10">Sneakers Company</h2>
-          <h1 className="text-slate-90 mb-10 font-bold text-3xl lg:text-4xl">Fall Limited Edition Sneakers</h1>
-          <p className="text-slate-600 mb-10 leading-relaxed">These low-profile sneakers are your perfect casual wear companion. Featuring a 
-          durable rubber outer sole, they’ll withstand everything the weather can offer.</p>
 
-          <div>
-            <ul>
-              <li>$125</li>
-              <li>50%</li>
+        <article className="px-8 pb-10">
+          <h2 className="bg-slate-100 py-1 px-2 text-orange-400 uppercase tracking-wide text-small font-bold inline-block rounded shadow mb-10">
+            Sneakers Company
+          </h2>
+          <h1 className="text-slate-90 mb-10 font-bold text-3xl lg:text-4xl">
+            Fall Limited Edition Sneakers
+          </h1>
+          <p className="text-slate-600 mb-10 leading-relaxed">
+            These low-profile sneakers are your perfect casual wear companion. Featuring a 
+          durable rubber outer sole, they’ll withstand everything the weather can offer.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-between">
+            <ul className="flex items-center gap-5">
+              <li className="text-slate-900 font-bold text-xl">$125</li>
+              <li className="bg-orange-100 py-1 px-2 text-orange-400 tracking-wide text-small font-bold inline-block rounded shadow">
+                50%
+              </li>
             </ul>
 
-            <p><s>$250</s></p>
+            <p className="text-slate-600 text-sm">
+              <s>$250</s>
+            </p>
           </div>
 
-          <div>
-            <ul>
+          <div className="mt-10">
+            <ul className="flex items-center justify-between bg-slate-100 py-2 px-4 rounded shadow">
               <li>
                 <img src={minus} alt="" />
               </li>
@@ -97,10 +108,11 @@ function App() {
                 <img src={plus} alt="" />
               </li>
             </ul>
-
-            <button>
+            <div>
+            <button className="flex items-center justify-center gap-4 bg-orange-500 py-2 px-4 w-full text-center text-white font-bold rounded-lg shadow mt-5 w-full">
                 <IoCartOutline /> Add to cart
             </button>
+            </div>
           </div>
         </article>
       </section>
