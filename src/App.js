@@ -7,9 +7,6 @@ import avatar from "./images/image-avatar.png";
 import minus from "./images/icon-minus.svg";
 import plus from "./images/icon-plus.svg";
 
-
-
-
 function Header() {
   return (
     <>
@@ -80,21 +77,27 @@ function App() {
 
       <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:mt-10">
         <article>
-          <div className="relative">
-            <img src={mainImage} alt="" className="w-full lg:rounded-2xl" />
-            <ul>
-              <li>
-                <button onClick={previousSlide} className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 opacity-50">
-                  <FaChevronLeft />
-                </button>
-              </li>
-              <li>
-                <button onClick={nextSlide} className="bg-white rounded-full p-5 shadow absolute right-4 top-1/2 -translate-y-1/2 opacity-50">
-                  <FaChevronRight />
-                </button>
-              </li>
-            </ul>
+          <div>
+            {products.map((item, index) => (
+              <div key={index} className={slideIndex === index + 1 ?  "relative" : "hidden"}>
+                <img src={item.mainImage} alt="" className="w-full lg:rounded-2xl" />
+                <ul className="lg:hidden ">
+                  <li>
+                    <button onClick={previousSlide} className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 opacity-50">
+                      <FaChevronLeft />
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={nextSlide} className="bg-white rounded-full p-5 shadow absolute right-4 top-1/2 -translate-y-1/2 opacity-50">
+                      <FaChevronRight />
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            ))}
+      
           </div>
+          
           <ul className="hidden lg:flex items-center justify-start gap-5 flex-wrap mt-5">
             {products.map((item, index) => ( 
               <li 
