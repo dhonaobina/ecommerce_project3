@@ -2,9 +2,11 @@ import { useState } from "react";
 import {data} from "./data";
 import logo from "./images/logo.svg";
 import { IoCartOutline } from "react-icons/io5";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import avatar from "./images/image-avatar.png";
 import minus from "./images/icon-minus.svg";
 import plus from "./images/icon-plus.svg";
+
 
 
 
@@ -15,7 +17,7 @@ function Header() {
         <div className="flex items-center justify-start gap-4">
           <img src={logo} alt=""></img>
 
-          <nav>
+          <nav className="hidden">
             <ul className="flex items-center justify-start gap-4">
               <li>Collections</li>
               <li>Men</li>
@@ -30,7 +32,7 @@ function Header() {
           <ul className="flex items-center justify-start gap-4">
             <li>
               <button>
-                <IoCartOutline />
+                <IoCartOutline className="text-2xl text-slate-600" />
               </button>
             </li>
             <li>
@@ -46,19 +48,54 @@ function Header() {
 function App() {
   const [products] = useState(data);
   const[value, setValue] = useState(1);
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState(0);
+  const [slideIndex, setSlideIndex] = useState(1)
   
-  const {mainImage} = products[value]
+  const { mainImage } = products[value]
+
+  const nextSlide = () => {
+    if (slideIndex !== products.length) {
+      setSlideIndex(slideIndex + 1)
+    } else if (slideIndex === products.length) {
+      setSlideIndex(1)
+    }
+  }
+
+  const previousSlide = () => {
+    if (slideIndex !== 1) {
+      setSlideIndex(slideIndex - 1)
+    } else if (slideIndex === 1) {
+      setSlideIndex(products.length)
+    }
+  }
+
+  const handleMinus = () => {
+    setAmount(amount - 1)
+    if (amount <=0) setAmount (0)
+  };
   
   return (
     <>
       <Header />
 
-      <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 mt-10">
+      <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:mt-10">
         <article>
-          <img src={mainImage} alt="" className="w-full rounded-2xl"/>
-
-          <ul className="flex items-center justify-start gap-5 flex-wrap mt-5">
+          <div className="relative">
+            <img src={mainImage} alt="" className="w-full lg:rounded-2xl" />
+            <ul>
+              <li>
+                <button onClick={previousSlide} className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 opacity-50">
+                  <FaChevronLeft />
+                </button>
+              </li>
+              <li>
+                <button onClick={nextSlide} className="bg-white rounded-full p-5 shadow absolute right-4 top-1/2 -translate-y-1/2 opacity-50">
+                  <FaChevronRight />
+                </button>
+              </li>
+            </ul>
+          </div>
+          <ul className="hidden lg:flex items-center justify-start gap-5 flex-wrap mt-5">
             {products.map((item, index) => ( 
               <li 
                 key={item.id} 
@@ -100,11 +137,11 @@ function App() {
 
           <div className="mt-10">
             <ul className="flex items-center justify-between bg-slate-100 py-2 px-4 rounded shadow">
-              <li>
+              <li onClick={handleMinus} className="cursor-pointer">
                 <img src={minus} alt="" />
               </li>
               <li>{amount}</li>
-              <li>
+              <li onClick={ () => setAmount (amount + 1)} className="cursor-pointer">
                 <img src={plus} alt="" />
               </li>
             </ul>
