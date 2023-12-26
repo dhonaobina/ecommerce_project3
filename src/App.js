@@ -1,93 +1,11 @@
 import { useState } from "react";
 import {data} from "./data";
-import logo from "./images/logo.svg";
 import { IoCartOutline } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import avatar from "./images/image-avatar.png";
 import minus from "./images/icon-minus.svg";
 import plus from "./images/icon-plus.svg";
-import close from "./images/icon-close.svg";
-
-function Header() {
-  return (
-    <>
-      <header className="flex items-center justify-between p-8 border-b border-slate-400 max-w-7xl mx-auto">
-        <div className="flex items-center justify-start gap-4">
-          <img src={logo} alt=""></img>
-
-          <nav className="hidden">
-            <ul className="flex items-center justify-start gap-4">
-              <li>Collections</li>
-              <li>Men</li>
-              <li>Women</li>
-              <li>About</li>
-              <li>Contact</li>
-            </ul>
-          </nav>
-        </div>
-
-        <div>
-          <ul className="flex items-center justify-start gap-4">
-            <li>
-              <button>
-                <IoCartOutline className="text-2xl text-slate-600" />
-              </button>
-            </li>
-            <li>
-              <img src={avatar} alt="" className="w-12" />
-            </li>
-          </ul>
-        </div>
-      </header>
-    </>
-  );
-}
-
-function Lightbox({products, slideIndex, nextSlide, previousSlide, setShowLightbox}) {
-  return (
-    <>
-      <article className="bg-black bg-opacity-75 fixed top-0 left-0 right-0 bottom-0 z-50">  
-          <button onClick={() => setShowLightbox(false)}>
-            <img src={close} alt=""className="w-10 absolute top-20 right-20"/>
-          </button>
-
-        <div className="flex items-center justify-center h-screen">       
-          {products.map((item, index) => (
-          <div 
-            key={index} 
-            className={slideIndex === index + 1 ?  "relative" : "hidden"}
-          >
-            <img 
-              src={item.mainImage} 
-              alt="" 
-              className="big-image lg:w-full lg:rounded-2xl"
-            />
-
-            <ul>
-                <li>
-                  <button 
-                    onClick={previousSlide} 
-                    className="bg-white rounded-full p-5 shadow absolute left-4 top-1/2 -translate-y-1/2 opacity-50"
-                  >
-                    <FaChevronLeft />
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    onClick={nextSlide} 
-                    className="bg-white rounded-full p-5 shadow absolute right-4 top-1/2 -translate-y-1/2 opacity-50"
-                  >
-                    <FaChevronRight />
-                  </button>
-                </li>
-            </ul>
-        </div>
-  ))};
-      </div>
-      </article>
-    </>
-  );
-}
+import Header from "./components/Header";
+import Lightbox from "./components/Lightbox";
 
 function App() {
   const [products] = useState(data);
